@@ -1,0 +1,32 @@
+# Subtitle Pipeline — requirements
+# Install: pip install -r requirements.txt
+#
+# GPU setup (NVIDIA CUDA):
+#   1. Install CUDA Toolkit: https://developer.nvidia.com/cuda-downloads
+#   2. Install PyTorch with CUDA:
+#      pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+#   3. Then install the rest:
+#      pip install -r requirements.txt
+
+# ── Core transcription (GPU-accelerated, 4-8x faster than openai-whisper) ────
+faster-whisper          # Whisper reimplementation using CTranslate2
+
+# ── CUDA runtime libs (needed by faster-whisper on Windows/Linux) ─────────────
+# Uncomment if you get "cublas" or "cudnn" errors:
+# nvidia-cublas-cu12
+# nvidia-cudnn-cu12
+
+# ── Audio I/O ─────────────────────────────────────────────────────────────────
+soundfile               # Read/write WAV files as numpy arrays
+ffmpeg-python           # Python bindings for ffmpeg
+imageio-ffmpeg          # Bundled ffmpeg binary (no manual ffmpeg install needed)
+
+# ── Optional: resampling (if audio is not 16 kHz) ────────────────────────────
+librosa                 # High-quality resampling (preferred)
+# scipy                 # Fallback resampling (lighter dependency)
+
+# ── Translation (fully local, no API key) ─────────────────────────────────────
+argostranslate          # Offline neural machine translation
+
+# ── Original openai-whisper (kept for reference, NOT used by main pipeline) ──
+# openai-whisper
